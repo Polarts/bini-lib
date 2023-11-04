@@ -10,7 +10,7 @@ export class IniFile {
     public static fromText(filePath: string, content: string) {
         const ini = new IniFile(filePath);
         const lines = content.split("\n");
-        
+        // TODO implement
         return ini;
     }
 
