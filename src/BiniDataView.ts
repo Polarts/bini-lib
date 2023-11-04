@@ -1,9 +1,13 @@
 import jDataView from "jdataview";
 import { BiniStringBlock } from "./BiniStringBlock";
 import { Section } from "./ini-parts/Section";
-import fs from "fs";
 
 export class BiniDataView extends jDataView {
+
+    constructor(buffer: Uint8Array, public filePath: string) {
+        super(buffer);
+    }
+    
     getReverseInt32(): number {
         const reverseBytes = this.getBytes(4).reverse();
         return new jDataView(reverseBytes).getInt32();
@@ -20,7 +24,6 @@ export class BiniDataView extends jDataView {
      */
     readBiniFile(byteLength: number): Section[] | null {
 
-        // const retVal: INIStruct[] = [];
         const fileTag = this.getString(4);
         const version = this.getReverseInt32();
 
@@ -36,14 +39,13 @@ export class BiniDataView extends jDataView {
             const stringBlockOffsetLength = byteLength - stringBlockOffset;
             const strings = this.getString(stringBlockOffsetLength);
             const stringBlock = new BiniStringBlock(strings);
-            fs.writeFileSync("stringBlock.txt", strings)
 
             this.seek(sectionBlockOffset);
             
             const sections: Section[] = [];
 
             while (this.tell() < stringBlockOffset) {
-                sections.push(Section.fromBini("", this, stringBlock))
+                sections.push(Section.fromBini(this.filePath, this, stringBlock))
             }
             
             return sections;

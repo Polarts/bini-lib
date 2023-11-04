@@ -5,8 +5,7 @@ import { Entry } from "./Entry";
 export class Section {
 
     public filePath: string = "";
-
-    private entries: Entry[] = [];
+    public entries: Entry[] = [];
 
     constructor(
         public name: string
