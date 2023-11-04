@@ -5,6 +5,7 @@ import { IniValue, IniValueType } from "./IniValueType";
 export class Entry {
 
     public filePath: string = "";
+    public section: string = "";
 
     constructor(
         public name: string,
@@ -47,6 +48,7 @@ export class Entry {
         const entry = new Entry(name, values);
         entry.name = name;
         entry.filePath = filePath;
+        entry.section = section;
         return entry;
     }
 

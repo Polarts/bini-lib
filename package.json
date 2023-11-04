@@ -1,14 +1,14 @@
 {
   "name": "bini-lib",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A library for dealing with the Freelancer (2003 game) Bini data files in the JS/TS ecosystem",
+  "main": "index.ts",
+  "author": "David Klein a.k.a Polarts",
+  "keywords": ["freelancer", "bini", "binary", "ini"],
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/jdataview": "^0.0.33",
     "ts-node": "^10.9.1"
