@@ -7,8 +7,9 @@ export class BiniStringBlock {
 
     public get(offset: number): string {
         let s = this.strings.get(offset);
-        if (!s) {
-            s = this.block.substring(offset, this.block.indexOf("\0", offset) - offset);
+        if (s === undefined) {
+            const endIndex = this.block.indexOf("\0", offset);
+            s = this.block.substring(offset, endIndex);
             this.strings.set(offset, s);
         }
         return s;

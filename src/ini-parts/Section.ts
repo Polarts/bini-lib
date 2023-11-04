@@ -4,7 +4,7 @@ import { Entry } from "./Entry";
 
 export class Section {
 
-    public filePath: string;
+    public filePath: string = "";
 
     private entries: Entry[] = [];
 
@@ -28,6 +28,10 @@ export class Section {
         }
 
         return section;
+    }
+
+    public toString() {
+        return `[${this.name}]\n${this.entries.join("\n")}`;
     }
 
 }

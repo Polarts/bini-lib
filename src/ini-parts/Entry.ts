@@ -4,7 +4,7 @@ import { IniValue, IniValueType } from "./IniValueType";
 
 export class Entry {
 
-    public filePath: string;
+    public filePath: string = "";
 
     constructor(
         public name: string,
@@ -18,6 +18,7 @@ export class Entry {
         section: string
     ): Entry {
         const nameOffset = reader.getReverseInt16();
+        
         const name = stringBlock.get(nameOffset);
 
         const valuesCount = reader.getBytes(1)[0];
@@ -47,5 +48,9 @@ export class Entry {
         entry.name = name;
         entry.filePath = filePath;
         return entry;
+    }
+
+    public toString() {
+        return `${this.name} = ${this.values.join(', ')}`;
     }
 }
