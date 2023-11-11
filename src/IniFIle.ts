@@ -9,7 +9,7 @@ export class IniFile {
 
     public static fromString(filePath: string, content: string) {
         const ini = new IniFile(filePath);
-        const lines = content.split("\n");
+        const lines = content.split(/\r?\n/);
         let currentSection: Section | null = null;
         for (const line of lines) {
             if (line) {
@@ -20,13 +20,16 @@ export class IniFile {
                         break;
                     case '[':
                         // Handle section
+                        if (currentSection) {
+                            ini.sections.push(currentSection);
+                        }
                         const sectionName = /\[(.*?)\]/.exec(line)?.at(1) ?? 'Null';
-                        currentSection = new Section(sectionName);
+                        currentSection = new Section(sectionName);                        
                         break;
                     default:
                         // Handle entry
                         if (currentSection) {
-                            currentSection.entries.push(Entry.fromString(line));
+                            currentSection.entries.push(Entry.fromString(line));                            
                         }
                         break;
                 }

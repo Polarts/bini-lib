@@ -4,11 +4,20 @@ import { IniValue, IniValueType } from "./IniValueType";
 
 function getTypedValue(value: string) {
     const stringVal = value.trim();
-    const numericVal = parseFloat(stringVal);
-    if (isNaN(numericVal)) {
-        return stringVal;
+    const isFloat = stringVal.includes(".");
+    
+    let numericVal: number | null = null;
+    if (isFloat) {
+        numericVal = parseFloat(stringVal);
+    } else {
+        numericVal = parseInt(stringVal);
     }
-    return numericVal;
+    
+    if (!isNaN(numericVal)) {
+        return numericVal;
+    }
+
+    return stringVal;
 }
 
 export class Entry {
