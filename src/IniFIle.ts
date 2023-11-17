@@ -1,9 +1,10 @@
 import { BiniDataView } from "./BiniDataView";
-import { Entry, Section } from "./ini-parts";
+import { IniComment, Entry, Section } from "./ini-parts";
 
 export class IniFile {
 
     public sections: Section[] = [];
+    public comments: IniComment[] = [];
 
     constructor(public filePath: string) { }
 
@@ -11,12 +12,23 @@ export class IniFile {
         const ini = new IniFile(filePath);
         const lines = content.split(/\r?\n/);
         let currentSection: Section | null = null;
-        for (const line of lines) {
+        for (const [index, line] of lines.entries()) {
             if (line) {
                 const firstChar = line.charAt(0);
                 switch (firstChar) {
                     case ';':
                         // Handle comment
+                        if (currentSection) {
+                            currentSection.comments.push({
+                                lineNum: index,
+                                content: line
+                            });
+                        } else {
+                            ini.comments.push({
+                                lineNum: index,
+                                content: line
+                            })
+                        }
                         break;
                     case '[':
                         // Handle section
@@ -35,6 +47,7 @@ export class IniFile {
                 }
             }
         }
+        ini.sections.push(currentSection);
         return ini;
     }
 
@@ -50,6 +63,10 @@ export class IniFile {
     }
 
     public toString() {
-        return this.sections.join("\n\n");
+        const text = this.sections.join("\n\n").split(/\r?\n/);
+        this.comments.forEach(c => {
+            text.splice(c.lineNum, 0, c.content);
+        })
+        return text.join('\n');
     }
 }

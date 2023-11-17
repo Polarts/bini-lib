@@ -1,6 +1,6 @@
 import { BiniDataView } from "../BiniDataView";
 import { BiniStringBlock } from "../BiniStringBlock";
-import { IniValue, IniValueType } from "./IniValueType";
+import { IniValue, IniValueType } from "./types";
 
 function getTypedValue(value: string) {
     const stringVal = value.trim();

@@ -1,18 +1,20 @@
 import { BiniDataView } from "../BiniDataView";
 import { BiniStringBlock } from "../BiniStringBlock";
 import { Entry } from "./Entry";
+import { IniComment } from "./types";
 
 export class Section {
 
     public filePath: string = "";
     public entries: Entry[] = [];
+    public comments: IniComment[] = [];
 
     constructor(
         public name: string
     ) { }
 
     public static fromBini(
-        filePath: string, 
+        filePath: string,
         reader: BiniDataView,
         stringBlock: BiniStringBlock
     ): Section {
@@ -22,7 +24,7 @@ export class Section {
         section.filePath = filePath;
 
         const entriesCount = reader.getReverseInt16();
-        for (let i=0; i<entriesCount; i++) {
+        for (let i = 0; i < entriesCount; i++) {
             section.entries.push(Entry.fromBini(filePath, reader, stringBlock, section.name));
         }
 
@@ -30,7 +32,7 @@ export class Section {
     }
 
     public toString() {
-        return `[${this.name}]\n${this.entries.join("\n")}`;
+        return `[${this.name}]\n${this.entries.join("\n")}${this.comments.length > 0 ? "\n" : ""}${this.comments.map(c => c.content).join("\n")}`;
     }
 
 }

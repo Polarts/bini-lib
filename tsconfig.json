@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
-        "esModuleInterop": true
-    }   
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "target": "ESNext"
+    }
 }
