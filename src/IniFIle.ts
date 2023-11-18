@@ -1,5 +1,5 @@
 import { BiniDataView } from "./BiniDataView";
-import { IniComment, Entry, Section } from "./ini-parts";
+import { IniComment, Entry, Section } from "./ini";
 
 export class IniFile {
 

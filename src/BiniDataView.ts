@@ -1,6 +1,6 @@
 import jDataView from "jdataview";
 import { BiniStringBlock } from "./BiniStringBlock";
-import { Section } from "./ini-parts/Section";
+import { Section } from "./ini/Section";
 
 export class BiniDataView extends jDataView {
 
