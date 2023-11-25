@@ -1,6 +1,6 @@
 {
   "name": "bini-lib",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A library for dealing with the Freelancer (2003 game) Bini data files in the JS/TS ecosystem",
   "main": "index.ts",
   "author": "David Klein a.k.a Polarts",

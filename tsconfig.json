@@ -3,6 +3,7 @@
         "esModuleInterop": true,
         "downlevelIteration": true,
         "target": "ESNext",
-        "moduleResolution": "NodeNext"
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext"
     }
 }
