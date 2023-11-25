@@ -4,6 +4,7 @@
         "downlevelIteration": true,
         "target": "ESNext",
         "moduleResolution": "NodeNext",
-        "module": "NodeNext"
+        "module": "NodeNext",
+        "outDir": "dist"
     }
 }
